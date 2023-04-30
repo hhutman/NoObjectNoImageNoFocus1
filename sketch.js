@@ -10,7 +10,7 @@ let colorvalue2 = 0;
 let colorvalue3 = 0;
 
 function setup() {
-  createCanvas(550, 285, WEBGL);
+  createCanvas(825, 427, WEBGL);
   osc1 = new p5.Oscillator();
   osc1.setType('sine');
   osc1.freq(285);
