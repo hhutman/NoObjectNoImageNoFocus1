@@ -10,10 +10,10 @@ let colorvalue2 = 0;
 let colorvalue3 = 0;
 
 function setup() {
-  createCanvas(710, 400, WEBGL);
+  createCanvas(550, 285, WEBGL);
   osc1 = new p5.Oscillator();
   osc1.setType('sine');
-  osc1.freq(220);
+  osc1.freq(285);
   osc1.amp(amps[0]);
   osc1.start();
   
@@ -53,7 +53,7 @@ function draw() {
   
   
   //visual 
-   background(209, 0, 209, 50);
+   background(40, 40, 40);
 
   let locX = mouseX - height / 1;
   let locY = mouseY - width / 1;
@@ -70,7 +70,7 @@ function draw() {
   //pointLight(240, 0, 240, locX, locY, 150);
 
   push();
-  translate(-width / 40, 0, 0); // move the box to the left
+  translate(-width / 145, 0, 0); // move the box to the left
   //rotateZ(frameCount * 0);
   rotateX(frameCount * .03);
   specularMaterial(440);
@@ -94,3 +94,34 @@ function changeAmplitude() {
   // Update the last ramp time
   lastRampTime = millis();
 }
+
+function keyPressed() {
+    if (keyCode === 32) { // Press spacebar to toggle sound on/off
+      toggleSound();
+    } else if (keyCode === UP_ARROW) { // Press up arrow to increase volume
+      increaseVolume();
+    } else if (keyCode === DOWN_ARROW) { // Press down arrow to decrease volume
+      decreaseVolume();
+    }
+  }
+  
+  function toggleSound() {
+    if (amps[0] > 0) {
+      targetAmps = [0, 0, 0];
+    } else {
+      targetAmps = [1, 1, 1];
+    }
+  }
+  
+  function increaseVolume() {
+    for (let i = 0; i < amps.length; i++) {
+      targetAmps[i] = min(amps[i] + 0.1, 1);
+    }
+  }
+  
+  function decreaseVolume() {
+    for (let i = 0; i < amps.length; i++) {
+      targetAmps[i] = max(amps[i] - 0.1, 0);
+    }
+  }
+  
